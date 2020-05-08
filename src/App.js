@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
-        React Advance
+        <h1 className="display-4 text-center text-muted">React Advance</h1>
     </div>
   );
 }
