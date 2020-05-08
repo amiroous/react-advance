@@ -1,16 +1,11 @@
 import React from 'react';
 import { useStateData } from "store";
-import { CHANGE_THEME } from "store/actions";
+import { changeTheme } from "store/actions";
 
 const ChildTwo = () => {
 
     const[{theme}, dispatch] = useStateData();
-    const handleSwitchTheme = (e) => {
-        dispatch({
-            type: CHANGE_THEME,
-            payload: e.target.value
-        });
-    };
+    const onChangeTheme = (e) => changeTheme(e.target.value, dispatch);
 
     return (
         <div className="mb-5">
@@ -19,7 +14,7 @@ const ChildTwo = () => {
                 <label htmlFor="switchTheme">Switch Theme</label>
                 <select className="form-control" id="switchTheme"
                     value={theme}
-                    onChange={handleSwitchTheme}
+                    onChange={onChangeTheme}
                 >
                     <option value="primary">Primary</option>
                     <option value="secondary">Secondary</option>

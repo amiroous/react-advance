@@ -1,16 +1,11 @@
 import React from 'react';
 import { useStateData } from "store";
-import { CHANGE_AUTH } from "store/actions";
+import { changeAuth } from "store/actions";
 
 const ChildOne = () => {
 
-    const [{ authenticated }, dispatch] = useStateData();
-    const handleSwitchAuth = (e) => {
-        dispatch({
-           type: CHANGE_AUTH,
-           payload: e.target.checked
-        });
-    };
+    const [{authenticated}, dispatch] = useStateData();
+    const onChangeAuth = (e) => changeAuth(e.target.checked, dispatch);
 
     return (
         <div className="mb-5">
@@ -18,7 +13,7 @@ const ChildOne = () => {
             <div className="form-group form-check">
                 <input type="checkbox" className="form-check-input" id="switchAuth"
                     checked={authenticated}
-                    onChange={handleSwitchAuth}
+                    onChange={onChangeAuth}
                 />
                 <label className="form-check-label ml-1" htmlFor="switchAuth">Switch Auth</label>
             </div>
