@@ -19,11 +19,11 @@ export default ({techs}) => {
                 <tbody>
                 {
                     techs.map(tech => (
-                        <tr>
+                        <tr key={tech.id}>
                             <th scope="row">{tech.id}</th>
-                            <td><Link href="/techs/[techId]" as={`/techs/${tech.id}`}>{tech.name}</Link></td>
+                            <td><Link href="/techs/[techId]" as={`/techs/${tech.id}`}><a>{tech.name}</a></Link></td>
                             <td>{tech.description}</td>
-                            <td>{tech.courses.length}</td>
+                            <td className="text-center">{tech.courses.length}</td>
                         </tr>
                     ))
                 }
