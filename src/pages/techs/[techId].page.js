@@ -1,9 +1,19 @@
-import React from 'react';
-import fetch from 'node-fetch';
+import React, { useEffect, useState } from 'react';
 import Base from "pages/layout/Base";
+import { useRouter } from 'next/router';
 
-export default ({tech}) => {
+export default () => {
 
+    const router = useRouter();
+    const techId = router.query.techId;
+    const [tech, setTech] = useState(null);
+    useEffect(() => {
+        techId && (async() => {
+            const techsResponse = await fetch(`${process.env.TECHS_API}/${techId}`);
+            const tech = await techsResponse.json();
+            setTech(tech);
+        })();
+    }, [techId]);
 
     return (
         <Base>
@@ -13,14 +23,3 @@ export default ({tech}) => {
         </Base>
     );
 };
-
-export async function getServerSideProps(context) {
-    const { techId } = context.query;
-
-    const techsResponse = await fetch(`${process.env.TECHS_API}/${techId}`);
-    const tech = await techsResponse.json();
-
-    return {
-        props: { tech }
-    }
-}
